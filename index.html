@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Function in JavaScrip</title>
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script> -->
+
+    <link rel="stylesheet" href="./css/style.css">
+
+    <!-- <script src="./js/quanLyTuyenSinh.js" defer></script>
+    <script src="./js/tinhTienDien.js" defer></script>
+    <script src="./js/tinhThueTNCN.js" defer></script>
+    <script src="./js/tinhTienCap.js" defer></script> -->
+</head>
+
+<body>
+    <!-- QUẢN LÝ TUYỂN SINH -->
+    <section>
+        <!-- Insert 6 input + 1 button + label để hiển thị kết quả -->
+         <fieldset>
+            <legend>Quản lý tuyển sinh:</legend>
+            <div>
+                <label for="">Nhập điểm chuẩn</label>
+                <input type="number" id="diemChuan" required>
+
+                <label for="">Điểm môn 1</label>
+                <input type="number" id="diemMon1" required>
+                <label for="">Điểm môn 2</label>
+                <input type="number" id="diemMon2" required>
+                <label for="">Điểm môn 3</label>
+                <input type="number" id="diemMon3" required>
+
+                <!-- <label for="">Khu vực</label> -->
+                <select name="" id="khuVuc">
+                    <option selected>Chọn khu vực</option>
+                    <option value="X">X</option>
+                    <option value="A">A</option>                    
+                    <option value="B">B</option>                    
+                    <option value="C">C</option>
+                </select>
+
+                <!-- <label for="">Đối tượng</label> -->
+                <select name="" id="doiTuong">
+                    <option selected>Chọn đối tượng</option>
+                    <option value="A">0</option>                    
+                    <option value="B">1</option>                    
+                    <option value="C">2</option>                    
+                    <option value="X">3</option>                    
+                </select>
+            </div>
+            <button id="btnTinhDiem">Kiểm tra</button>
+            <div id="pKetQua"></div>
+         </fieldset>
+    </section>
+
+    <!-- TÍNH TIỀN ĐIỆN -->
+    <section>
+
+    </section>
+
+    <!-- TÍNH THUẾ THU NHẬP CÁ NHÂN -->
+    <section>
+
+    </section>
+
+    <!-- TÍNH TIỀN CÁP -->
+    <section>
+
+    </section>
+
+
+    <!-- LINK JS -->
+    <script src="./js/quanLyTuyenSinh.js"></script>
+    <script src="./js/tinhTienDien.js"></script>
+    <script src="./js/tinhThueTNCN.js"></script>
+    <script src="./js/tinhTienCap.js"></script>
+</body>
+
+</html>
