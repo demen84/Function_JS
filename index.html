@@ -8,6 +8,14 @@
 
     <!-- <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script> -->
 
+    <!-- FONT GOOGLE -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+
+
     <link rel="stylesheet" href="./css/style.css">
 
     <!-- <script src="./js/quanLyTuyenSinh.js" defer></script>
@@ -17,59 +25,114 @@
 </head>
 
 <body>
+    <h1>Bài tập chính - Buổi 13</h1>
+
     <!-- QUẢN LÝ TUYỂN SINH -->
     <section>
         <!-- Insert 6 input + 1 button + label để hiển thị kết quả -->
-         <fieldset>
-            <legend>Quản lý tuyển sinh:</legend>
-            <div>
+        <fieldset>
+            <legend class="caption">Quản lý tuyển sinh:</legend>
+            <form>
                 <label for="">Nhập điểm chuẩn</label>
-                <input type="number" id="diemChuan" required>
+                <input type="number" id="diemChuan" class="numbers" required>
 
                 <label for="">Điểm môn 1</label>
-                <input type="number" id="diemMon1" required>
+                <input type="number" id="diemMon1" class="numbers" required>
                 <label for="">Điểm môn 2</label>
-                <input type="number" id="diemMon2" required>
+                <input type="number" id="diemMon2" class="numbers" required>
                 <label for="">Điểm môn 3</label>
-                <input type="number" id="diemMon3" required>
+                <input type="number" id="diemMon3" class="numbers" required>
 
                 <!-- <label for="">Khu vực</label> -->
                 <select name="" id="khuVuc">
                     <option selected>Chọn khu vực</option>
                     <option value="X">X</option>
-                    <option value="A">A</option>                    
-                    <option value="B">B</option>                    
+                    <option value="A">A</option>
+                    <option value="B">B</option>
                     <option value="C">C</option>
                 </select>
 
                 <!-- <label for="">Đối tượng</label> -->
                 <select name="" id="doiTuong">
                     <option selected>Chọn đối tượng</option>
-                    <option value="A">0</option>                    
-                    <option value="B">1</option>                    
-                    <option value="C">2</option>                    
-                    <option value="X">3</option>                    
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
                 </select>
+            </form>
+            <div>
+                <div><button id="btnTinhDiem">Kiểm tra</button></div>
+                <div id="pKetQua"></div>
             </div>
-            <button id="btnTinhDiem">Kiểm tra</button>
-            <div id="pKetQua"></div>
-         </fieldset>
-    </section>
+        </fieldset>
+    </section> <br>
 
     <!-- TÍNH TIỀN ĐIỆN -->
     <section>
+        <fieldset>
+            <legend class="caption">Tính tiền điện:</legend>
+            <form>
+                <label for="">Tên khách hàng</label>
+                <input type="text" id="custName" class="inputText">
 
-    </section>
+                <label for="">Số Kwh</label>
+                <input type="number" id="soDien" class="numbers" required>
+            </form>
+            <div>
+                <div><button id="btnTinhTienDien">Tính tiền điện</button></div>
+                <div id="pTienDien"></div>
+            </div>
+        </fieldset>
+    </section> <br>
 
     <!-- TÍNH THUẾ THU NHẬP CÁ NHÂN -->
     <section>
+        <fieldset>
+            <legend class="caption">Tính thuế thu nhập cá nhân:</legend>
+            <form>
+                <label for="">Họ và tên</label>
+                <input type="text" id="fullName" class="inputText">
 
-    </section>
+                <label for="">Tổng thu nhập năm</label>
+                <input type="number" id="tongThuNhap" class="amount" required>
+
+                <label for="">Số người phụ thuộc</label>
+                <input type="number" id="soNguoiPhuThuoc" class="numbers" required>
+            </form>
+            <div>
+                <div><button id="btnTinhThue">Tính thuế TNCN</button></div>
+                <div id="pTienThue"></div>
+            </div>
+        </fieldset>
+    </section> <br>
 
     <!-- TÍNH TIỀN CÁP -->
     <section>
+        <fieldset>
+            <legend class="caption">Tính tiền cáp:</legend>
+            <form>
+                <label for="">Mã khách hàng</label>
+                <input type="text" id="custID" class="inputText">
 
-    </section>
+                <label for="">Loại khách hàng</label>
+                <select name="" id="">
+                    <option value="" selected>---Chọn loại khách hàng---</option>
+                    <option value="nhaDan">Nhà dân</option>
+                    <option value="doanhNghiep">Doanh nghiệp</option>
+                </select>
+
+                <label for="">Số kết nối</label>
+                <input type="number" id="soKetNoi" class="numbers" required>
+                <label for="">Số kênh cao cấp</label>
+                <input type="number" id="soKenhCaoCap" class="numbers" required>
+            </form>
+            <div>
+                <div><button id="btnTinhTienCap">Tính tiền cáp</button></div>
+                <div id="pTienCap"></div>
+            </div>
+        </fieldset>
+    </section> <br>
 
 
     <!-- LINK JS -->

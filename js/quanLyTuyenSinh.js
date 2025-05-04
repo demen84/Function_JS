@@ -13,25 +13,57 @@
 */
 
 //Hàm tính tổng điểm của thí sinh
-function tinhTongDiem(diemMon1, diemMon2, diemMon3, khuVuc, doiTuong)
-{
+function tinhTongDiem(diemMon1, diemMon2, diemMon3, khuVuc, doiTuong) {
     let tongDiem = diemMon1 + diemMon2 + diemMon3;
-    if (khuVuc === 'A') {
-        tongDiem += 2;
-    } else if (khuVuc === 'B') {
-        tongDiem += 1;
-    } else if (khuVuc === 'C') {
-        tongDiem += 0.5;
+
+    // if (khuVuc === 'A') {
+    //     tongDiem += 2;
+    // } else if (khuVuc === 'B') {
+    //     tongDiem += 1;
+    // } else if (khuVuc === 'C') {
+    //     tongDiem += 0.5;
+    // };
+
+    //Dùng switch case:
+    switch (khuVuc) {
+        case 'A': tongDiem += 2; break;
+        case 'B': tongDiem += 1; break;
+        case 'C': tongDiem += 0.5; break;
+        case 'X': tongDiem += 0; break;
     }
 
-    if (doiTuong === 1) {
+    if (doiTuong == 1) {
         tongDiem += 2.5;
-    } else if (doiTuong === 2) {
+    } else if (doiTuong == 2) {
         tongDiem += 1.5;
-    } else if (doiTuong === 3) {
+    } else if (doiTuong == 3) {
         tongDiem += 1;
-    }
+    };
 
     return tongDiem;
 }
 
+//DOM tới nút Tính điểm
+document.getElementById('btnTinhDiem').onclick = function () {
+    let diemChuan = document.getElementById('diemChuan').value * 1;
+    let diemMon1 = document.getElementById('diemMon1').value * 1;
+    let diemMon2 = document.getElementById('diemMon2').value * 1;
+    let diemMon3 = document.getElementById('diemMon3').value * 1;
+    let khuVuc = document.getElementById('khuVuc').value;
+    let doiTuong = document.getElementById('doiTuong').value;
+
+    let tongDiem3Mon = tinhTongDiem(diemMon1, diemMon2, diemMon3, khuVuc, doiTuong);
+    let thongBao = "";
+    if ((tongDiem3Mon >= diemChuan) && diemMon1 > 0 && diemMon2 > 0 && diemMon3 > 0) {
+        thongBao = "Đậu";
+    }
+    else {
+        thongBao = "Rớt"
+    }
+
+    //Xuất ra thông tin kết quả:
+    let ketQua = document.getElementById('pKetQua');
+    ketQua.innerHTML = `Tổng điểm: ${tongDiem3Mon}; Kết quả: ${thongBao}`;
+
+    ketQua.classList.add('styleKQ');
+}
