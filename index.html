@@ -116,10 +116,10 @@
                 <input type="text" id="custID" class="inputText">
 
                 <label for="">Loại khách hàng</label>
-                <select name="" id="">
+                <select name="" id="custType">
                     <option value="" selected>---Chọn loại khách hàng---</option>
-                    <option value="nhaDan">Nhà dân</option>
-                    <option value="doanhNghiep">Doanh nghiệp</option>
+                    <option value="01">01-Nhà dân</option>
+                    <option value="02">02-Doanh nghiệp</option>
                 </select>
 
                 <label for="">Số kết nối</label>
@@ -128,7 +128,9 @@
                 <input type="number" id="soKenhCaoCap" class="numbers" required>
             </form>
             <div>
-                <div><button id="btnTinhTienCap">Tính tiền cáp</button></div>
+                <div>
+                    <button id="btnTinhTienCap" type="submit">Tính tiền cáp</button>
+                </div>
                 <div id="pTienCap"></div>
             </div>
         </fieldset>

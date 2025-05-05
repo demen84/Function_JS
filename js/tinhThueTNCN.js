@@ -23,7 +23,7 @@ function tinhThueTNCN(hoTen, thuNhapNam, soNguoiPhuThuoc){
     let chiuThueMuc1 = 60000000 - 4000000 - soNguoiPhuThuoc * 1600000;
     let thuNhapChiuThue = thuNhapNam - 4000000 - soNguoiPhuThuoc * 1600000;
 
-    if (thuNhapNam <= 60000000) {
+    if (thuNhapNam <= 60000000 && thuNhapNam > 0) {
         tienThue = thuNhapChiuThue * 0.05;
     } else if (thuNhapNam > 60000000 && thuNhapNam <= 120000000) {
         tienThue = chiuThueMuc1 * 0.05 + (thuNhapNam - 60000000) * 0.1;
@@ -35,8 +35,10 @@ function tinhThueTNCN(hoTen, thuNhapNam, soNguoiPhuThuoc){
         tienThue = chiuThueMuc1 * 0.05 + 60000000 * 0.1 + 90000000 * 0.15 + 174000000 * 0.2 + (thuNhapNam - 384000000) * 0.25;
     } else if (thuNhapNam > 624000000 && thuNhapChiuThue <= 960000000) {
         tienThue = chiuThueMuc1 * 0.05 + 60000000 * 0.1 + 90000000 * 0.15 + 174000000 * 0.2 + 240000000 * 0.25 + (thuNhapNam - 624000000) * 0.3;
-    } else {
+    } else if (thuNhapNam > 960000000){
         tienThue = chiuThueMuc1 * 0.05 + 60000000 * 0.1 + 90000000 * 0.15 + 174000000 * 0.2 + 240000000 * 0.25 + 336000000 * 0.3 + (thuNhapNam - 624000000) * 0.5;
+    } else {
+        tienThue = 0;
     }
 
     return tienThue;
