@@ -29,7 +29,8 @@ function tinhTongDiem(diemMon1, diemMon2, diemMon3, khuVuc, doiTuong) {
         case 'A': tongDiem += 2; break;
         case 'B': tongDiem += 1; break;
         case 'C': tongDiem += 0.5; break;
-        case 'X': tongDiem += 0; break;
+        // case 'X': tongDiem += 0; break;
+        default: tongDiem += 0;
     }
 
     if (doiTuong == 1) {
@@ -58,7 +59,7 @@ document.getElementById('btnTinhDiem').onclick = function () {
         thongBao = "Đậu";
     }
     else {
-        thongBao = "Rớt"
+        thongBao = "Rớt";
     }
 
     //Xuất ra thông tin kết quả:

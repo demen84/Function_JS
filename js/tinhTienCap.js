@@ -12,9 +12,9 @@
 */
 
 //Hàm tính tiền cáp
-function tinhTienCap(custId, custType, soKetnoi, soKenh){
+function tinhTienCap(custId, custType, soKetnoi, soKenh) {
     let tongTien = 0;
-    switch (custType){
+    switch (custType) {
         case '01': {
             tongTien = 4.5 + 20.5 + 7.5 * soKenh;
         }; break;
@@ -31,32 +31,34 @@ function tinhTienCap(custId, custType, soKetnoi, soKenh){
 }
 
 //DOM toi nut tinh tien cap
-document.getElementById('btnTinhTienCap').onclick = function(e){
+document.getElementById('btnTinhTienCap').onclick = function (e) {
     e.preventDefault();
     // alert('OK nha');
-    let maKH=document.getElementById('custID').value;
-    let loaiKH=document.getElementById('custType').value;
-    let soKetnoi=document.getElementById('soKetNoi').value * 1;
-    let soKenh=document.getElementById('soKenhCaoCap').value * 1;
+    let maKH = document.getElementById('custID').value;
+    let loaiKH = document.getElementById('custType').value;
+    let soKetnoi = document.getElementById('soKetNoi').value * 1;
+    let soKenh = document.getElementById('soKenhCaoCap').value * 1;
 
-    //Gọi hàm tinh tiền cáp
     let tienCap = tinhTienCap(maKH, loaiKH, soKetnoi, soKenh);
 
-    //Xử lý hiển thị kết quả
     let pTienCap = document.getElementById('pTienCap');
-    pTienCap.innerHTML = `Tổng cước phí thuê bao cáp quang là: ${tienCap}$`;
+    pTienCap.innerHTML = `Tổng cước phí là: ${tienCap}$`;
     pTienCap.classList.add('styleKQ');
 }
 
-//Xử lý sự kiện onchange cho ô loại khách hàng
-//Khi người dùng chọn loại khách hàng là Doanh nghiệp thì ô Số kết nối sẽ Enable để người dùng nhập vào
-//Ngược lại nếu chọn là Nhà dân thì ô Số kết nối sẽ disable
-document.getElementById('custType').onchange = function(){
-    let custType=document.getElementById('custType').value;
-    let soKetnoi=document.getElementById('soKetNoi');
-    if (custType==1){
-        soKetnoi.disabled=true;
+
+//Xử lý sự kiện thay đổi loại khách hàng (sự kiện onchange tại ô select)
+document.getElementById('custType').onchange = function () {
+    let custType = document.getElementById('custType').value;
+    let soKetnoi = document.getElementById('soKetNoi');
+    let lblSoKetnoi = document.getElementById('lblSoKetNoi');
+    if (custType === '01') {
+        // soKetnoi.disabled=true;
+        soKetnoi.style.display = 'none'; //Ẩn ô nhập số kết nối
+        lblSoKetnoi.style.display = 'none'; //Ẩn nhãn số kết nối
     } else {
-        soKetnoi.disabled=false;
+        // soKetnoi.disabled=false;
+        soKetnoi.style.display = "inline"; //Hiện ô nhập số kết nối
+        lblSoKetnoi.style.display = "inline"; //Hiện nhãn số kết nối
     }
 }

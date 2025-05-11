@@ -13,35 +13,94 @@
 * Đầu ra:
     - Tổng tiền điện XXX VND của khách hàng ABC
 */
+//Khai báo cáo biến
+const GIA_50KW_DAU = 500; //500 VNĐ
+const GIA_50KW_KE = 650;
+const GIA_100KW_KE = 850;
+const GIA_150KW_KE = 1100;
+const GIA_KW_CONLAI = 1300;
+
+const MUC_1 = 50;
+const MUC_2 = 100;
+const MUC_3 = 200;
+const MUC_4 = 350;
+// const MUC_5 = 350;
+
+//Hàm tính tiền điện theo từng mức
+function tienDienMuc1(soKwh, giaMuc1) {
+    return soKwh * giaMuc1; //50Kw đầu tiên
+}
+
+function tienDienMuc2(soKwh, giaMuc2) {
+    return (soKwh - MUC_1) * giaMuc2; //50Kw kế tiếp
+}
+
+function tienDienMuc3(soKwh, giaMuc3) {
+    return (soKwh - MUC_2) * giaMuc3; //100Kw kế tiếp
+}
+
+function tienDienMuc4(soKwh, giaMuc4) {
+    return (soKwh - MUC_3) * giaMuc4; //150Kw kế tiếp
+}
+
+function tienDienMuc5(soKwh, giaMuc5) {
+    return (soKwh - MUC_4) * giaMuc5; //150Kw kế tiếp
+}
 
 //Hàm tính tiền điện
 function tinhTienDien(customerName, soKwh) {
     let tongTienDien = 0;
-    if (soKwh <= 50) {
-        tongTienDien = soKwh * 500;
-    } else if (soKwh > 50 && soKwh <= 100) {
-        tongTienDien = 50 * 500 + (soKwh - 50) * 650;
-    } else if (soKwh > 100 && soKwh <= 200) {
-        tongTienDien = 50 * 500 + 50 * 650 + (soKwh - 100) * 850;
-    } else if (soKwh > 200 && soKwh <= 350) {
-        tongTienDien = 50 * 500 + 50 * 650 + 100 * 850 + (soKwh - 200) * 1100;
+    // let flag = true;
+
+    // if (soKwh < 0){
+    //     flag = false;
+    //     return "Số Kwh không hợp lệ!";
+    // }
+    // Cách 1: Dùng if else
+    if (soKwh <= MUC_1 && soKwh > 0) {
+        //tongTienDien = soKwh * GIA_50KW_DAU; //OR: tongTienDien=tienDienMuc1(soKwh, GIA_50KW_DAU);
+        tongTienDien = tienDienMuc1(soKwh, GIA_50KW_DAU);
+    } else if (soKwh > MUC_1 && soKwh <= MUC_2) {
+        tongTienDien = tienDienMuc1(MUC_1, GIA_50KW_DAU) + tienDienMuc2(soKwh, GIA_50KW_KE);
+    } else if (soKwh > MUC_2 && soKwh <= MUC_3) {
+        tongTienDien = tienDienMuc1(MUC_1, GIA_50KW_DAU) + tienDienMuc2(MUC_2, GIA_50KW_KE) + tienDienMuc3(soKwh, GIA_100KW_KE);
+    } else if (soKwh > MUC_3 && soKwh <= MUC_4) {
+        tongTienDien = tienDienMuc1(MUC_1, GIA_50KW_DAU) + tienDienMuc2(MUC_2, GIA_50KW_KE) + tienDienMuc3(MUC_3, GIA_100KW_KE) + tienDienMuc4(soKwh, GIA_150KW_KE);
     } else if (soKwh > 350) {
-        tongTienDien = 50 * 500 + 50 * 650 + 100 * 850 + 150 * 1100 + (soKwh - 350) * 1300;
+        tongTienDien = tienDienMuc1(MUC_1, GIA_50KW_DAU) + tienDienMuc2(MUC_2, GIA_50KW_KE) + tienDienMuc3(MUC_3, GIA_100KW_KE) + tienDienMuc4(MUC_4, GIA_150KW_KE) + tienDienMuc5(soKwh, GIA_KW_CONLAI);
+    } else {
+        tongTienDien = 0;
     }
+
+    // Cách 2: ngắn gọn hơn, dễ bảo trì hơn - nhưng chưa học
+    // let bacGia = [500, 650, 850, 1100, 1300];
+    // let bacKwh = [50, 50, 100, 150, Infinity]; // Infinity để xử lý trường hợp vượt quá 350 kWh
+    // // let tongTienDien = 0;
+    // let i = 0;
+    // while (soKwh > 0) {
+    //     let dungLuong = Math.min(soKwh, bacKwh[i]);
+    //     tongTienDien += dungLuong * bacGia[i];
+    //     soKwh -= dungLuong;
+    //     i++;
+    // }
 
     return tongTienDien;
 }
 
+//DOM tới nút tính tiền điện => gọi hàm tính tiền điện; => In kết quả ra màn hình
 document.getElementById('btnTinhTienDien').onclick = function () {
     //DOM tới tên khách hàng & số kwh tiêu thụ
-    let custName = document.getElementById('custName').value;
+    let tenKhachHang = document.getElementById('custName').value;
     let soDien = document.getElementById('soDien').value * 1;
 
-    let tienDien = tinhTienDien(custName, soDien);
-
-    //DOM tới thẻ kết quả:
     let pTienDien = document.getElementById('pTienDien');
-    pTienDien.innerHTML = `Tổng tiền điện của khách hàng ${custName} là: ${tienDien.toLocaleString()} VNĐ`;
 
+    if (soDien > 0) {
+        let tienDien = tinhTienDien(tenKhachHang, soDien);
+        pTienDien.innerHTML = `Tổng tiền điện của khách hàng ${tenKhachHang} là: ${tienDien.toLocaleString()} VNĐ`;
+    } else {
+        pTienDien.innerHTML = "Số Kwh không hợp lệ!";
+    }
+    //add class vào thẻ p kết quả:
     pTienDien.classList.add('styleKQ');
 }
