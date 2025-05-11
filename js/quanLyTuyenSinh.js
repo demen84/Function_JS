@@ -57,6 +57,13 @@ document.getElementById('btnTinhDiem').onclick = function () {
     let thongBao = "";
     if ((tongDiem >= diemChuan) && diemMon1 > 0 && diemMon2 > 0 && diemMon3 > 0) {
         thongBao = "Đậu";
+        // thongBao = Swal.fire({
+        //     title: 'Thông báo',
+        //     text: 'Đậu!',
+        //     icon: 'info',
+        //     confirmButtonText: 'OK',
+        //     allowOutsideClick: false
+        // }); CÁCH NÀY KHÔNG ĐƯỢC
     }
     else {
         thongBao = "Rớt";

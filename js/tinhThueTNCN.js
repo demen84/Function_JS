@@ -39,12 +39,26 @@ function tienThueMuc1(thuNhapNam, soNguoiPhuThuoc, thueMuc1) {
     // let thuNhapChiuThue = thuNhapNam - TIEN_MIEN_THUE - soNguoiPhuThuoc * TIEN_MIEN_THUE_NGUOI_PT;
     // let tienThue = thuNhapChiuThue * thueMuc1;
     // return tienThue;
-    let mien_thue=soNguoiPhuThuoc * TIEN_MIEN_THUE_NGUOI_PT + TIEN_MIEN_THUE;
+    let mien_thue = soNguoiPhuThuoc * TIEN_MIEN_THUE_NGUOI_PT + TIEN_MIEN_THUE;
     if (soNguoiPhuThuoc < 0) {
-        alert("Số người phụ thuộc không hợp lệ!");
+        // alert("Số người phụ thuộc không hợp lệ!");
+        Swal.fire({
+            title: 'Thông báo',
+            text: 'Số người phụ thuộc không hợp lệ!',
+            icon: 'info',
+            confirmButtonText: 'OK',
+            allowOutsideClick: false
+        });
         return 0;
     } else if (thuNhapNam <= mien_thue) {
-        alert("Tổng thu nhập năm của bạn không cần đóng thuế!");
+        // alert("Tổng thu nhập năm của bạn không cần đóng thuế!");
+        Swal.fire({
+            title: 'Thông báo',
+            text: 'Tổng thu nhập năm của bạn không cần đóng thuế!',
+            icon: 'info',
+            confirmButtonText: 'OK',
+            allowOutsideClick: false
+        });
         return 0;
     } else {
         let thuNhapChiuThue = thuNhapNam - mien_thue;
@@ -91,27 +105,7 @@ function tienThueMuc7(thuNhapNam, soNguoiPhuThuoc, thueMuc7) {
 function tinhThueTNCN(hoTen, thuNhapNam, soNguoiPhuThuoc) {
     let tienThue = 0;
 
-    // let chiuThueMuc1 = 60000000 - 4000000 - soNguoiPhuThuoc * 1600000;
-    // let thuNhapChiuThue = thuNhapNam - 4000000 - soNguoiPhuThuoc * 1600000;
-
-    // if (thuNhapNam <= 60000000 && thuNhapNam > 0) {
-    //     tienThue = thuNhapChiuThue * 0.05;
-    // } else if (thuNhapNam > 60000000 && thuNhapNam <= 120000000) {
-    //     tienThue = chiuThueMuc1 * 0.05 + (thuNhapNam - 60000000) * 0.1;
-    // } else if (thuNhapNam > 120000000 && thuNhapChiuThue <= 210000000) {
-    //     tienThue = chiuThueMuc1 * 0.05 + 60000000 * 0.1 + (thuNhapNam - 120000000) * 0.15;
-    // } else if (thuNhapNam > 210000000 && thuNhapChiuThue <= 384000000) {
-    //     tienThue = chiuThueMuc1 * 0.05 + 60000000 * 0.1 + 90000000 * 0.15 + (thuNhapNam - 210000000) * 0.2;
-    // } else if (thuNhapNam > 384000000 && thuNhapChiuThue <= 624000000) {
-    //     tienThue = chiuThueMuc1 * 0.05 + 60000000 * 0.1 + 90000000 * 0.15 + 174000000 * 0.2 + (thuNhapNam - 384000000) * 0.25;
-    // } else if (thuNhapNam > 624000000 && thuNhapChiuThue <= 960000000) {
-    //     tienThue = chiuThueMuc1 * 0.05 + 60000000 * 0.1 + 90000000 * 0.15 + 174000000 * 0.2 + 240000000 * 0.25 + (thuNhapNam - 624000000) * 0.3;
-    // } else if (thuNhapNam > 960000000) {
-    //     tienThue = chiuThueMuc1 * 0.05 + 60000000 * 0.1 + 90000000 * 0.15 + 174000000 * 0.2 + 240000000 * 0.25 + 336000000 * 0.3 + (thuNhapNam - 624000000) * 0.5;
-    // } else {
-    //     tienThue = 0;
-    // }
-    //Cách 2: gọi các hàm tính thuế theo từng mức
+    //Gọi các hàm tính thuế theo từng mức
     if (thuNhapNam <= MUC_TN_1 && thuNhapNam > 0) {
         tienThue = tienThueMuc1(thuNhapNam, soNguoiPhuThuoc, THUE_MUC_1);
     } else if (thuNhapNam > MUC_TN_1 && thuNhapNam <= MUC_TN_2) {

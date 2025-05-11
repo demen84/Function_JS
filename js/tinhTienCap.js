@@ -30,7 +30,15 @@ function tinhTienCapNhaDan(soKenhCaoCap) {
         //Tính tiền cáp cho khách hàng nhà dân
         tongTien = ND_PHI_XU_LY_HOA_DON + ND_PHI_DICH_VU_CO_BAN + (ND_PHI_THUE_BAO_KENH_CAO_CAP * soKenhCaoCap);
     } else {
-        alert("Số kênh cao cấp không hợp lệ!");
+        // alert("Số kênh cao cấp không hợp lệ!");
+        // Swal.fire('Thông báo', 'Số kênh cao cấp không hợp lệ!', 'info');
+        Swal.fire({
+            title: 'Thông báo',
+            text: 'Số kênh cao cấp không hợp lệ!',
+            icon: 'info',
+            confirmButtonText: 'OK',
+            allowOutsideClick: false
+        });
         return 0;
     }
     return tongTien;
@@ -41,7 +49,15 @@ function tinhTienCapDoanhNghiep(soKetNoi, soKenhCaoCap) {
     let tongTien = 0;
     //Tính tiền cáp cho khách hàng doanh nghiệp
     if (soKetNoi <= 0 || soKenhCaoCap <= 0) {
-        alert("Số kết nối/Số kênh cao cấp không hợp lệ!");
+        // alert("Số kết nối/Số kênh cao cấp không hợp lệ!");
+        // Swal.fire('Thông báo', 'Số kết nối/Số kênh cao cấp không hợp lệ!', 'info');
+        Swal.fire({
+            title: 'Thông báo',
+            text: 'Số kết nối/Số kênh cao cấp không hợp lệ!',
+            icon: 'info',
+            confirmButtonText: 'OK',
+            allowOutsideClick: false
+        });
         return 0;
     } else {
         if (soKetNoi <= DN_MUC_KET_NOI_1) {
