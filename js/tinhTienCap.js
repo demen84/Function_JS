@@ -20,13 +20,19 @@ const DN_PHI_XU_LY_HOA_DON = 15; //15$
 const DN_PHI_DICH_VU_CO_BAN_10 = 75; //75$ VỚI 10 KẾT NỐI ĐẦU
 const DN_PHI_DICH_VU_CO_BAN_11 = 5; //5$ VỚI MỖI KẾT NỐI TIEP THEO SAU
 const DN_PHI_THUE_BAO_KENH_CAO_CAP = 50; //50$/kênh
+
 const DN_MUC_KET_NOI_1 = 10; //10 kết nối đầu tiên
 
 //HÀM TÍNH TIỀN CÁP KHÁCH HÀNG 'NHÀ DÂN'
 function tinhTienCapNhaDan(soKenhCaoCap) {
     let tongTien = 0;
-    //Tính tiền cáp cho khách hàng nhà dân
-    tongTien = ND_PHI_XU_LY_HOA_DON + ND_PHI_DICH_VU_CO_BAN + (ND_PHI_THUE_BAO_KENH_CAO_CAP * soKenhCaoCap);
+    if (soKenhCaoCap > 0) {
+        //Tính tiền cáp cho khách hàng nhà dân
+        tongTien = ND_PHI_XU_LY_HOA_DON + ND_PHI_DICH_VU_CO_BAN + (ND_PHI_THUE_BAO_KENH_CAO_CAP * soKenhCaoCap);
+    } else {
+        alert("Số kênh cao cấp không hợp lệ!");
+        return 0;
+    }
     return tongTien;
 }
 
@@ -34,10 +40,15 @@ function tinhTienCapNhaDan(soKenhCaoCap) {
 function tinhTienCapDoanhNghiep(soKetNoi, soKenhCaoCap) {
     let tongTien = 0;
     //Tính tiền cáp cho khách hàng doanh nghiệp
-    if (soKetNoi <= DN_MUC_KET_NOI_1) {
-        tongTien = DN_PHI_XU_LY_HOA_DON + DN_PHI_DICH_VU_CO_BAN_10 + (DN_PHI_THUE_BAO_KENH_CAO_CAP * soKenhCaoCap);
+    if (soKetNoi <= 0 || soKenhCaoCap <= 0) {
+        alert("Số kết nối/Số kênh cao cấp không hợp lệ!");
+        return 0;
     } else {
-        tongTien = DN_PHI_XU_LY_HOA_DON + (DN_PHI_DICH_VU_CO_BAN_10 + (DN_PHI_DICH_VU_CO_BAN_11 * (soKetNoi - DN_MUC_KET_NOI_1))) + (DN_PHI_THUE_BAO_KENH_CAO_CAP * soKenhCaoCap);
+        if (soKetNoi <= DN_MUC_KET_NOI_1) {
+            tongTien = DN_PHI_XU_LY_HOA_DON + DN_PHI_DICH_VU_CO_BAN_10 + (DN_PHI_THUE_BAO_KENH_CAO_CAP * soKenhCaoCap);
+        } else {
+            tongTien = DN_PHI_XU_LY_HOA_DON + (DN_PHI_DICH_VU_CO_BAN_10 + (DN_PHI_DICH_VU_CO_BAN_11 * (soKetNoi - DN_MUC_KET_NOI_1))) + (DN_PHI_THUE_BAO_KENH_CAO_CAP * soKenhCaoCap);
+        }
     }
     return tongTien;
 }
@@ -64,22 +75,6 @@ function tinhTienCap(custId, custType, soKetnoi, soKenh) {
     return tongTien;
 }
 
-//DOM toi nut tinh tien cap
-document.getElementById('btnTinhTienCap').onclick = function (e) {
-    e.preventDefault();
-    // alert('OK nha');
-    let maKH = document.getElementById('custID').value;
-    let loaiKH = document.getElementById('custType').value;
-    let soKetnoi = document.getElementById('soKetNoi').value * 1;
-    let soKenh = document.getElementById('soKenhCaoCap').value * 1;
-
-    let tienCap = tinhTienCap(maKH, loaiKH, soKetnoi, soKenh);
-
-    let pTienCap = document.getElementById('pTienCap');
-    pTienCap.innerHTML = `Tổng cước phí là: ${tienCap}$`;
-    pTienCap.classList.add('styleKQ');
-}
-
 
 //Xử lý sự kiện thay đổi loại khách hàng (sự kiện onchange tại ô select)
 document.getElementById('custType').onchange = function () {
@@ -95,4 +90,20 @@ document.getElementById('custType').onchange = function () {
         soKetnoi.style.display = "inline"; //Hiện ô nhập số kết nối
         lblSoKetnoi.style.display = "inline"; //Hiện nhãn số kết nối
     }
+}
+
+//DOM toi nut tinh tien cap
+document.getElementById('btnTinhTienCap').onclick = function (e) {
+    e.preventDefault();
+    // alert('OK nha');
+    let maKH = document.getElementById('custID').value;
+    let loaiKH = document.getElementById('custType').value;
+    let soKetnoi = document.getElementById('soKetNoi').value * 1;
+    let soKenh = document.getElementById('soKenhCaoCap').value * 1;
+
+    let tienCap = tinhTienCap(maKH, loaiKH, soKetnoi, soKenh);
+
+    let pTienCap = document.getElementById('pTienCap');
+    pTienCap.innerHTML = `Tổng cước phí là: ${tienCap}$`;
+    pTienCap.classList.add('styleKQ');
 }

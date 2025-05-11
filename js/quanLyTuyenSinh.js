@@ -33,11 +33,11 @@ function tinhTongDiem(diemMon1, diemMon2, diemMon3, khuVuc, doiTuong) {
         default: tongDiem += 0;
     }
 
-    if (doiTuong == 1) {
+    if (doiTuong === '1') {
         tongDiem += 2.5;
-    } else if (doiTuong == 2) {
+    } else if (doiTuong === '2') {
         tongDiem += 1.5;
-    } else if (doiTuong == 3) {
+    } else if (doiTuong === '3') {
         tongDiem += 1;
     };
 
@@ -53,9 +53,9 @@ document.getElementById('btnTinhDiem').onclick = function () {
     let khuVuc = document.getElementById('khuVuc').value;
     let doiTuong = document.getElementById('doiTuong').value;
 
-    let tongDiem3Mon = tinhTongDiem(diemMon1, diemMon2, diemMon3, khuVuc, doiTuong);
+    let tongDiem = tinhTongDiem(diemMon1, diemMon2, diemMon3, khuVuc, doiTuong);
     let thongBao = "";
-    if ((tongDiem3Mon >= diemChuan) && diemMon1 > 0 && diemMon2 > 0 && diemMon3 > 0) {
+    if ((tongDiem >= diemChuan) && diemMon1 > 0 && diemMon2 > 0 && diemMon3 > 0) {
         thongBao = "Đậu";
     }
     else {
@@ -64,7 +64,7 @@ document.getElementById('btnTinhDiem').onclick = function () {
 
     //Xuất ra thông tin kết quả:
     let ketQua = document.getElementById('pKetQua');
-    ketQua.innerHTML = `Tổng điểm: ${tongDiem3Mon}; Kết quả: ${thongBao}`;
+    ketQua.innerHTML = `Tổng điểm: ${tongDiem}; Kết quả: ${thongBao}`;
 
     ketQua.classList.add('styleKQ');
 }
