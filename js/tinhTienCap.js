@@ -10,20 +10,54 @@
 * Đầu ra:
     - Số tiền hóa đơn của khách hàng
 */
+//KHAI BÁO BIẾN HẰNG SỐ - CÁC LOẠI PHÍ NHÀ DÂN (ND)
+const ND_PHI_XU_LY_HOA_DON = 4.5; //4.5$
+const ND_PHI_DICH_VU_CO_BAN = 20.5; //20.5$
+const ND_PHI_THUE_BAO_KENH_CAO_CAP = 7.5; //7.5$/kênh
+
+//KHAI BÁO BIẾN HẰNG SỐ - CÁC LOẠI PHÍ DOANH NGHIỆP (DN)
+const DN_PHI_XU_LY_HOA_DON = 15; //15$
+const DN_PHI_DICH_VU_CO_BAN_10 = 75; //75$ VỚI 10 KẾT NỐI ĐẦU
+const DN_PHI_DICH_VU_CO_BAN_11 = 5; //5$ VỚI MỖI KẾT NỐI TIEP THEO SAU
+const DN_PHI_THUE_BAO_KENH_CAO_CAP = 50; //50$/kênh
+const DN_MUC_KET_NOI_1 = 10; //10 kết nối đầu tiên
+
+//HÀM TÍNH TIỀN CÁP KHÁCH HÀNG 'NHÀ DÂN'
+function tinhTienCapNhaDan(soKenhCaoCap) {
+    let tongTien = 0;
+    //Tính tiền cáp cho khách hàng nhà dân
+    tongTien = ND_PHI_XU_LY_HOA_DON + ND_PHI_DICH_VU_CO_BAN + (ND_PHI_THUE_BAO_KENH_CAO_CAP * soKenhCaoCap);
+    return tongTien;
+}
+
+//HÀM TÍNH TIỀN CÁP KHÁCH HÀNG 'DOANH NGHIỆP'
+function tinhTienCapDoanhNghiep(soKetNoi, soKenhCaoCap) {
+    let tongTien = 0;
+    //Tính tiền cáp cho khách hàng doanh nghiệp
+    if (soKetNoi <= DN_MUC_KET_NOI_1) {
+        tongTien = DN_PHI_XU_LY_HOA_DON + DN_PHI_DICH_VU_CO_BAN_10 + (DN_PHI_THUE_BAO_KENH_CAO_CAP * soKenhCaoCap);
+    } else {
+        tongTien = DN_PHI_XU_LY_HOA_DON + (DN_PHI_DICH_VU_CO_BAN_10 + (DN_PHI_DICH_VU_CO_BAN_11 * (soKetNoi - DN_MUC_KET_NOI_1))) + (DN_PHI_THUE_BAO_KENH_CAO_CAP * soKenhCaoCap);
+    }
+    return tongTien;
+}
+
 
 //Hàm tính tiền cáp
 function tinhTienCap(custId, custType, soKetnoi, soKenh) {
     let tongTien = 0;
     switch (custType) {
         case '01': {
-            tongTien = 4.5 + 20.5 + 7.5 * soKenh;
+            // tongTien = 4.5 + 20.5 + 7.5 * soKenh;
+            tongTien = tinhTienCapNhaDan(soKenh);
         }; break;
         case '02': {
-            if (soKetnoi <= 10) {
-                tongTien = 15 + 75 + 50 * soKenh;
-            } else {
-                tongTien = 15 + (75 + 5 * (soKetnoi - 10)) + 50 * soKenh;
-            }
+            // if (soKetnoi <= 10) {
+            //     tongTien = 15 + 75 + 50 * soKenh;
+            // } else {
+            //     tongTien = 15 + (75 + 5 * (soKetnoi - 10)) + 50 * soKenh;
+            // }
+            tongTien = tinhTienCapDoanhNghiep(soKetnoi, soKenh);
         }; break;
     }
 
