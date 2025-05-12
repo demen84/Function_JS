@@ -55,18 +55,24 @@ document.getElementById('btnTinhDiem').onclick = function () {
 
     let tongDiem = tinhTongDiem(diemMon1, diemMon2, diemMon3, khuVuc, doiTuong);
     let thongBao = "";
-    if ((tongDiem >= diemChuan) && diemMon1 > 0 && diemMon2 > 0 && diemMon3 > 0) {
-        thongBao = "Đậu";
-        // thongBao = Swal.fire({
-        //     title: 'Thông báo',
-        //     text: 'Đậu!',
-        //     icon: 'info',
-        //     confirmButtonText: 'OK',
-        //     allowOutsideClick: false
-        // }); CÁCH NÀY KHÔNG ĐƯỢC
-    }
-    else {
-        thongBao = "Rớt";
+
+    if (diemChuan <= 0) {
+        // alert("Điểm chuẩn không hợp lệ!");
+        Swal.fire({
+            title: 'Thông báo',
+            text: 'Điểm chuẩn phải lớn hơn 0!',
+            icon: 'info',
+            confirmButtonText: 'OK',
+            allowOutsideClick: false
+        });
+        return;
+    } else {
+        if ((tongDiem >= diemChuan) && diemMon1 > 0 && diemMon2 > 0 && diemMon3 > 0) {
+            thongBao = "Đậu";
+        }
+        else {
+            thongBao = "Rớt";
+        }
     }
 
     //Xuất ra thông tin kết quả:
